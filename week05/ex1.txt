@@ -1,0 +1,58 @@
+CREATE TABLE Customer
+(
+cliendId int NOT NULL PRIMARY KEY,
+balance int NOT NULL,
+creditLimit int NOT NULL,
+discount int
+);
+CREATE TABLE Customer_ShippingAddress
+(
+customerId int PRIMARY KEY,
+house# int NOT NULL,
+street char(50),
+district char(50),
+city char(50),
+FOREIGN KEY (customerId) REFERENCES Customer(clientId)
+);
+CREATE TABLE Order
+(
+orderId int PRIMARY KEY,
+customerId int NOT NULL,
+date char(50),
+FOREIGN KEY (orderId) REFERENCES Customer(customerId)
+);
+CREATE TABLE Order_ShippingAddress
+(
+orderId int PRIMARY KEY,
+house# int NOT NULL,
+street char(50),
+district char(50),
+city char(50),
+FOREIGN KEY (orderId) REFERENCES Order(orderId)
+);
+CREATE TABLE Includes
+(
+orderId int PRIMARY KEY,
+itemID int PRIMARY KEY,
+quantity int NOT NULL,
+FOREIGN KEY (orderId) REFERENCES Order(orderId),
+FOREIGN KEY (itemID) REFERENCES Item(itemID)
+);
+CREATE TABLE Item
+(
+itemId int PRIMARY KEY,
+description char(50)
+);
+CREATE TABLE Manufacturer
+(
+manufacturerId int NOT NULL PRIMARY KEY,
+phonenumber char(12) NOT NULL
+);
+CREATE TABLE Produce
+(
+manufacturerId int PRIMARY KEY,
+itemID int PRIMARY KEY,
+quantity int NOT NULL,
+FOREIGN KEY (manufacturerId) REFERENCES Manufactorer(manufacturerId),
+FOREIGN KEY (itemID) REFERENCES Item(itemID)
+);
