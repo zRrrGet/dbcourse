@@ -1,0 +1,16 @@
+1) select distinct s.sname from "Suppliers" s, "Catalog" c, "Parts" p where s.sid=c.sid and c.pid=p.pid and p.color='Red' 
+2) select distinct c.sid from "Catalog" c, "Parts" p where c.pid=p.pid and (p.color='Red' or p.color='Green') 
+3) select distinct s.sid from "Suppliers" s, "Catalog" c, "Parts" p where s.sid=c.sid and c.pid = p.pid and p.color='Red' 
+or s.address = '221 Packer Street' 
+4) select distinct c.sid from "Catalog" c where not exists(select p.pid from "Parts" p where (p.color ='Red' or p.color='Green')
+and (not exists( select c1.sid from "Catalog" c1 where c1.sid = c.sid and c1.pid = c.pid))) 
+5) select distinct c.sid from "Catalog" c where not exists(select p.pid from "Parts" p where (p.color ='Red') 
+and (not exists( select cl.sid from "Catalog" c1 where cl.sid = c.sid and c1.pid = c.pid))) 
+or not exists(select p.pid from "Parts" p where (p.color = 'Green') 
+and (not exists( select c1.sid from "Catalog" c1 where cl.sid = c.sid and c1.pid = c.pid)))
+6) select distinct cl.sid, c2.sid from "Catalog" c1, "Catalog" c2 where (not cl.sid = c2.sid and cl .cost > c2.cost) 
+7) select distinct cl .pid from "Catalog" cl , "Catalog" c2 where el .pid = c2.pid and not cl .sid = c2.sid 
+8) select c.sid, p.color, AVG(c.cost) from "Catalog" c, "Parts" p GROUP BY p.color, c.sid, c.pid, p.pid having c.pid=p.pid 
+and (p.color = 'Red' OR p.color = 'Green') 
+9) select distinct c.sid from "Catalog" c where c.cost >= 50 
+

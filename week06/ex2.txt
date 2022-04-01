@@ -1,0 +1,6 @@
+1) select * from "Author" inner join "Book" on author id = editor 
+2) select first_name, last name from "Author 
+except select first_name, last name from "Author, "Book" where author_id = editor 
+3) select author id from "Author"
+except select editor from "Book" 
+
