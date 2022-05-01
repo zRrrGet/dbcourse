@@ -1,0 +1,6 @@
+SELECT pr.id, pr.name, pr.details, pr.price, pr.type FROM purchases p JOIN purchases_products_list ppl ON p.id = ppl.id JOIN products pr on p.id = pr.id JOIN sales s ON pr.type = s.type;
+SELECT customer_id, SUM(d) FROM (SELECT p.customer_id, ((SUM(pr.price)/100*(s.discount))) d FROM purchases p JOIN purchases_products_list ppl ON p.id = ppl.id JOIN products pr on p.id = pr.id JOIN sales s ON pr.type = s.type GROUP BY p.customer_id, s.discount) n1 GROUP BY customer_id;
+CREATE INDEX ON products(type);
+CREATE INDEX ON sales(type);
+SELECT pr.id, pr.name, pr.details, pr.price, pr.type FROM purchases p JOIN purchases_products_list ppl ON p.id = ppl.id JOIN products pr on p.id = pr.id JOIN sales s ON pr.type = s.type;
+SELECT customer_id, SUM(d) FROM (SELECT p.customer_id, ((SUM(pr.price)/100*(s.discount))) d FROM purchases p JOIN purchases_products_list ppl ON p.id = ppl.id JOIN products pr on p.id = pr.id JOIN sales s ON pr.type = s.type GROUP BY p.customer_id, s.discount) n1 GROUP BY customer_id;
